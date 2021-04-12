@@ -1,11 +1,11 @@
 /**
- * Given an array of domains, return the object with the appearances of the DNS.
+ * Given an array of arr, return the object with the appearances of the DNS.
  *
- * @param {Array} domains
+ * @param {Array} arr
  * @return {Object}
  *
  * @example
- * domains = [
+ * arr = [
  *  'code.yandex.ru',
  *  'music.yandex.ru',
  *  'yandex.ru'
@@ -20,8 +20,28 @@
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new Error('Not implemented');
+function getDNSStats(domains) {
+  const result = {};
+  const arr = domains.slice(0);
+  for (let i = 0; i < arr.length; i++) {
+    let domain = '';
+    while (arr[i]) {
+      const index = arr[i].lastIndexOf('.');
+      if (index !== -1) {
+        domain += arr[i].slice(index);
+        arr[i] = arr[i].slice(0, index);
+      } else {
+        domain += `.${arr[i]}`;
+        arr[i] = false;
+      }
+      if (result[domain]) {
+        result[domain]++;
+      } else {
+        result[domain] = 1;
+      }
+    }
+  }
+  return result;
 }
 
 module.exports = getDNSStats;
