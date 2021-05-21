@@ -11,16 +11,7 @@
  *
  */
 function getSumOfDigits(n) {
-  const arr = n.toString().split('');
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    sum += Number(arr[i]);
-  }
-  sum = sum.toString();
-  while (sum.length > 1) {
-    return getSumOfDigits(sum);
-  }
-  return Number(sum);
+  return n < 10 ? n : getSumOfDigits(n.toString().split('').reduce((acc, curr) => acc + +curr, 0));
 }
 
 module.exports = getSumOfDigits;
